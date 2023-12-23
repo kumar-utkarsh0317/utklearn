@@ -9,4 +9,6 @@ namespace utk{
                         arma::mat& y_test, 
                         float percent
                         );
+
+    // void absolute_error()
 }

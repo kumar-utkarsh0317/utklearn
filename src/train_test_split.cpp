@@ -16,23 +16,23 @@ void utk::train_test_split(arma::mat& data,
     const int n_rows = data.n_rows;
 
     arma::mat X, y;
-    X = data.submat(0, 0, n_rows - 1, n_cols - 2);
-    y = data.submat(0, n_cols - 1, n_rows - 1, n_cols - 1);
+    X = data.submat(0, 0, n_rows-2, n_cols-1);
+    y = data.submat(n_rows-1, 0, n_rows-1, n_cols-1);
 
-    arma::uvec v = arma::linspace<arma::uvec>(0, n_rows - 1, n_rows);
+    arma::uvec v = arma::linspace<arma::uvec>(0, n_cols - 1, n_cols);
     v = arma::shuffle(v);
 
-    int n_train_data = n_rows * (percent / 100); 
+    int n_train_point = n_cols * (percent / 100); 
 
     //iterating through the vector element
-    for (int i = 0; i < n_rows; i++){
-        int row_n = v(i);
-        if(i < n_train_data){
-            X_train = arma::join_vert(X_train, X.row(row_n));
-            y_train = arma::join_vert(y_train, y.row(row_n));
+    for (int i = 0; i < n_cols; i++){
+        int col_n = v(i);
+        if(i < n_train_point){
+            X_train = arma::join_horiz(X_train, X.col(col_n));
+            y_train = arma::join_horiz(y_train, y.col(col_n));
         }else{
-            X_test = arma::join_vert(X_test, X.row(row_n));
-            y_test = arma::join_vert(y_test, y.row(row_n));
+            X_test = arma::join_horiz(X_test, X.col(col_n));
+            y_test = arma::join_horiz(y_test, y.col(col_n));
         }
     }
     
