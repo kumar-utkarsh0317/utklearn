@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project(utkarsh_library)
 
-add_library(utklearn src/train_test_split.cpp)
+add_library(utklearn src/function_implementation.cpp)
 
 # Add the header directory to the include path
 include_directories(header)
