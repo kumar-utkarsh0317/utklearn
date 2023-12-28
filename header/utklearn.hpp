@@ -10,6 +10,8 @@ namespace utk{
                         float percent
                         );
 
+    void normalize_features(arma::mat& features);
+
     double mean_absolute_error(arma::rowvec predictions, arma::rowvec true_value);
 
     double mean_squared_error(arma::rowvec predictions, arma::rowvec true_value);

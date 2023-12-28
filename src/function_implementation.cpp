@@ -44,8 +44,27 @@ void utk::train_test_split(arma::mat& data,
     cout<<"dimension of X_test:: ("<<X_test.n_rows<<" ,"<<X_test.n_cols<<")"<<endl;
     cout<<"dimension of y_test:: ("<<y_test.n_rows<<" ,"<<y_test.n_cols<<")"<<endl;
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void normalize_features(arma::mat& features)
+{
+    int nRows = features.n_rows;
+    for (int i = 0; i < nRows; i++)
+    {
+        arma::rowvec v = features.row(i);
+        double max_value = v.max();
+
+        int nElements = v.n_elem;
+
+        for(int j = 0; j < nElements; j++)
+        {
+            features(i, j) = features(i, j) / max_value;
+
+        }
+    }
+}
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 double utk::mean_absolute_error(arma::rowvec predictions, arma::rowvec true_value)
 {
     if(predictions.n_cols != true_value.n_cols)
